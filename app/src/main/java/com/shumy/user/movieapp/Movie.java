@@ -2,41 +2,48 @@ package com.shumy.user.movieapp;
 
 public class Movie {
 
-    String title;
-    String releaseYear;
-    String rating;
-    String summary;
+    private String mTitle;
+    private String mReleaseYear;
+    private String mRating;
+    private String mSummary;
+    private String mPoster;
 
-    public Movie(String title, String releaseYear, String rating, String summary) {
-        this.title = title;
-        this.releaseYear = releaseYear;
-        this.rating = rating;
-        this.summary = summary;
+    public Movie(String title, String releaseYear, String rating, String summary, String poster) {
+        mTitle = title;
+        mReleaseYear = releaseYear;
+        mRating = rating;
+        mSummary = summary;
+        mPoster = poster;
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public String getReleaseYear() {
-        return releaseYear;
+        return mReleaseYear;
     }
 
     public String getRating() {
-        return rating;
+        return mRating;
     }
 
     public String getSummary() {
-        return summary;
+        return mSummary;
+    }
+
+    public String getPoster() {
+        return mPoster;
     }
 
     @Override
     public String toString() {
         return "Movie{" +
-                "title='" + title + '\'' +
-                ", releaseYear='" + releaseYear + '\'' +
-                ", rating='" + rating + '\'' +
-                ", summory='" + summary + '\'' +
+                "mTitle='" + mTitle + '\'' +
+                ", mReleaseYear='" + mReleaseYear + '\'' +
+                ", mRating='" + mRating + '\'' +
+                ", mSummary='" + mSummary + '\'' +
+                ", mPoster='" + mPoster + '\'' +
                 '}';
     }
 }
