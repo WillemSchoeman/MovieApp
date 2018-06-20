@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button popularButton = findViewById(R.id.popularButton);
         Button playingButton = findViewById(R.id.playingButton);
         Button ratedButton = findViewById(R.id.ratedButton);
-        Button upcommingButton = findViewById(R.id.upcomingButton);
+        Button upcomingButton = findViewById(R.id.upcomingButton);
         popularButton.setOnClickListener(this);
         playingButton.setOnClickListener(this);
         ratedButton.setOnClickListener(this);
-        upcommingButton.setOnClickListener(this);
+        upcomingButton.setOnClickListener(this);
 
         Log.d(TAG, "onCreate: ends");
     }
