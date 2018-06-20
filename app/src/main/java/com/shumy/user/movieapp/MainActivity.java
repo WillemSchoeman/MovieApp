@@ -1,10 +1,17 @@
 package com.shumy.user.movieapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements GetRawData.OnDownloadComplete {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
@@ -13,9 +20,7 @@ public class MainActivity extends AppCompatActivity implements GetRawData.OnDown
     // top_rated https://api.themoviedb.org/3/movie/top_rated?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&page=1
     // upcoming https://api.themoviedb.org/3/movie/upcoming?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&page=1
 
-    // basic search https://api.themoviedb.org/3/search/movie?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&query=deadpool&page=1&include_adult=false
-
-    // baseURL https://api.themoviedb.org/3
+    public static final String EXTRA_MESSAGE = "com.example.android.DisplayActivity.extra.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,23 +28,54 @@ public class MainActivity extends AppCompatActivity implements GetRawData.OnDown
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GetRawData getRawData = new GetRawData(this);
-        getRawData.execute("https://api.themoviedb.org/3/movie/now_playing?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&page=1");
+        Button popularButton = findViewById(R.id.popularButton);
+        Button playingButton = findViewById(R.id.playingButton);
+        Button ratedButton = findViewById(R.id.ratedButton);
+        Button upcommingButton = findViewById(R.id.upcomingButton);
+        popularButton.setOnClickListener(this);
+        playingButton.setOnClickListener(this);
+        ratedButton.setOnClickListener(this);
+        upcommingButton.setOnClickListener(this);
 
         Log.d(TAG, "onCreate: ends");
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// Block used to see if download is complete and then log the data or return error
-////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void onClick(View view) {
+        Intent intent = null;
+        String myURL;
 
-    @Override
-    public void onDownloadComplete(String data,DownloadStatus status) {
-        if(status == DownloadStatus.OK) {
-            Log.d(TAG, "onDownloadComplete: data is " + data);
-        }else {
-            Log.e(TAG, "onDownloadComplete failed with status " + status);
+        switch(view.getId()) {
+            case R.id.popularButton:
+                intent = new Intent(this,DisplayActivity.class);
+                myURL = "https://api.themoviedb.org/3/movie/popular?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&page=1";
+                Log.d(TAG, "onClick: popular button pressed with URL is " + myURL);
+                intent.putExtra(EXTRA_MESSAGE,myURL);
+                break;
+            case R.id.playingButton:
+                intent = new Intent(this,DisplayActivity.class);
+                myURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&page=1";
+                Log.d(TAG, "onClick: playing button pressed with URL is " + myURL);
+                intent.putExtra(EXTRA_MESSAGE,myURL);
+                break;
+            case R.id.ratedButton:
+                intent = new Intent(this,DisplayActivity.class);
+                myURL = "https://api.themoviedb.org/3/movie/top_rated?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&page=1";
+                Log.d(TAG, "onClick: rated button pressed with URL is " + myURL);
+                intent.putExtra(EXTRA_MESSAGE,myURL);
+                break;
+            case R.id.upcomingButton:
+                intent = new Intent(this,DisplayActivity.class);
+                myURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&page=1";
+                Log.d(TAG, "onClick: upcomming button pressed with URL is " + myURL);
+                intent.putExtra(EXTRA_MESSAGE,myURL);
+                break;
+
+
+            default:
+
+        }
+        if(intent != null) {
+            startActivity(intent);
         }
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////
 }

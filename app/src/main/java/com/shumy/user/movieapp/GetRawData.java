@@ -1,5 +1,6 @@
 package com.shumy.user.movieapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,38 +16,18 @@ enum DownloadStatus {IDLE,PROCESSING,NOT_INITIALISED,FAILED_OR_EMPTY,OK}
 public class GetRawData extends AsyncTask<String,Void,String> {
 
     private static final String TAG = "GetRawData";
+
     private DownloadStatus mDownloadStatus;
-    private final OnDownloadComplete mCallback;
+    private final DisplayActivity mCallback;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enables GetRawData to call back to the MainActivity
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public GetRawData(OnDownloadComplete callback) {
+
+    public GetRawData(DisplayActivity callback) {
         this.mDownloadStatus = DownloadStatus.IDLE;
         mCallback = callback;
-    }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// This defines the method the callback must use
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    interface OnDownloadComplete {
-        void onDownloadComplete(String data,DownloadStatus status);
-    }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// When the data download is completed, the onDownloadComplete function is called and
-// download status and data is given to onDownloadComplete in MainActivity
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @Override
-    protected void onPostExecute(String s) {
-        Log.d(TAG, "onPostExecute: parameter = " + s);
-        if(mCallback != null) {
-            mCallback.onDownloadComplete(s,mDownloadStatus);
-        }
-        Log.d(TAG, "onPostExecute: ends");
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,4 +91,29 @@ public class GetRawData extends AsyncTask<String,Void,String> {
         return null;
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This defines the method the callback must use
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//    interface OnDownloadComplete {
+//        void onDownloadComplete(String data,DownloadStatus status);
+//    }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// When the data download is completed, the onDownloadComplete function is called and
+// download status and data is given to onDownloadComplete in MainActivity
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    protected void onPostExecute(String s) {
+        Log.d(TAG, "onPostExecute: parameter = " + s);
+        if(mCallback != null) {
+            mCallback.onDownloadComplete(s,mDownloadStatus);
+        }
+        Log.d(TAG, "onPostExecute: ends");
+    }
+
+
+
 }
