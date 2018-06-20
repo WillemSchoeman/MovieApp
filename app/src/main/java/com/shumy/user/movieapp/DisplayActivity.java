@@ -1,18 +1,26 @@
 package com.shumy.user.movieapp;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DisplayActivity extends MainActivity implements GetMovieJsonData.OnDataAvailable {
 
     private static final String TAG = "DisplayActivity";
 
-    TextView displayTextView;
+    //TextView displayTextView;
+
+    private MoviesAdapter mMoviesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +33,14 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
 //        GetRawData getRawData = new GetRawData(this);
 //        getRawData.execute(myURL);
 
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mMoviesAdapter = new MoviesAdapter(this, new ArrayList<Movie>());
+        recyclerView.setAdapter(mMoviesAdapter);
 
 
-    }
 
-    public void onDataAvailable(List<Movie> data, DownloadStatus status) {
-        if(status == DownloadStatus.OK) {
-            Log.d(TAG, "onAvailableComplete: data is " + data);
-
-//            displayTextView = findViewById(R.id.displayTextView);
-//            displayTextView.setText();
-        }
-        else {
-            // download or processing failed
-            Log.e(TAG, "onAvailableComplete failed with status" + status);
-        }
     }
 
     @Override
@@ -52,6 +53,25 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
         getMovieJsonData.execute();
         Log.d(TAG, "onResume ends");
     }
+
+    public void onDataAvailable(List<Movie> movies, DownloadStatus status) {
+        if(status == DownloadStatus.OK) {
+            Log.d(TAG, "onAvailableComplete: data is " + movies);
+
+
+//            displayTextView = findViewById(R.id.displayTextView);
+//            displayTextView.setText(movies);
+
+        mMoviesAdapter.loadNewData(movies);
+
+        }
+        else {
+            // download or processing failed
+            Log.e(TAG, "onAvailableComplete failed with status" + status);
+        }
+    }
+
+
 
 
 }

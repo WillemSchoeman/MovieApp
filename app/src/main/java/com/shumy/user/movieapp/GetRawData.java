@@ -18,14 +18,14 @@ public class GetRawData extends AsyncTask<String,Void,String> {
     private static final String TAG = "GetRawData";
 
     private DownloadStatus mDownloadStatus;
-    private final DisplayActivity mCallback;
+    private final GetMovieJsonData mCallback;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enables GetRawData to call back to the MainActivity
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public GetRawData(DisplayActivity callback) {
+    public GetRawData(GetMovieJsonData callback) {
         this.mDownloadStatus = DownloadStatus.IDLE;
         mCallback = callback;
     }

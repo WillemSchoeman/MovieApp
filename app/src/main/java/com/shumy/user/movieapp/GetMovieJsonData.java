@@ -16,28 +16,26 @@ public class GetMovieJsonData extends AsyncTask<String,Void,List<Movie>> impleme
     private static final String TAG = "GetMovieJsonData";
 
     private List<Movie> mMovieList = null;
+    private String newURL;
+    private final OnDataAvailable mCallBack;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Use call back field to MainActivity to send the Data when available
 // Gives back a list of movies and the download status
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private final OnDataAvailable mCallback;
-
     interface OnDataAvailable {
         void onDataAvailable(List<Movie> data, DownloadStatus status);
     }
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constructor for all the parameters
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public GetMovieJsonData(OnDataAvailable callback, String myURL) {
         Log.d(TAG, "GetMovieJsonData called");
-        mCallback = callback;
-        mMyURL = myURL;
+        mCallBack = callback;
+        newURL = myURL;
     }
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,7 +54,7 @@ public class GetMovieJsonData extends AsyncTask<String,Void,List<Movie>> impleme
     protected List<Movie> doInBackground(String... params) {
         Log.d(TAG, "doInBackground starts");
         GetRawData getRawData = new GetRawData(this);
-        getRawData.execute(mMyURL);
+        getRawData.execute(newURL);
         Log.d(TAG, "doInBackground ends");
         return mMovieList;
     }
@@ -70,7 +68,7 @@ public class GetMovieJsonData extends AsyncTask<String,Void,List<Movie>> impleme
 
             try {
                 JSONObject jsonData  = new JSONObject(data);
-                JSONArray itemsArray = jsonData.getJSONArray("movie");
+                JSONArray itemsArray = jsonData.getJSONArray("results");
 
                 for(int i=0; i<itemsArray.length();i++) {
                     JSONObject jsonMovie = itemsArray.getJSONObject(i);
@@ -92,13 +90,12 @@ public class GetMovieJsonData extends AsyncTask<String,Void,List<Movie>> impleme
                 status = DownloadStatus.FAILED_OR_EMPTY;
             }
         }
+
+        if(mCallBack != null) {
+            mCallBack.onDataAvailable(mMovieList,status);
+        }
+        Log.d(TAG, "onDownloadComplete: ends");
     }
-
-
-
-
-
-
 }
 
 

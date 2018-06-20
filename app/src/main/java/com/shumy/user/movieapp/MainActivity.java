@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.upcomingButton:
                 intent = new Intent(this,DisplayActivity.class);
                 myURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=d87c00b6a00ae74e930c063e106d6b4d&language=en-US&page=1";
-                Log.d(TAG, "onClick: upcomming button pressed with URL is " + myURL);
+                Log.d(TAG, "onClick: upcoming button pressed with URL is " + myURL);
                 intent.putExtra(EXTRA_MESSAGE,myURL);
                 break;
 
