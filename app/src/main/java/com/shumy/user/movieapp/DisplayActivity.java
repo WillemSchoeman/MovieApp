@@ -18,9 +18,7 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
 
     private static final String TAG = "DisplayActivity";
 
-    //TextView displayTextView;
-
-    private MoviesAdapter mMoviesAdapter;
+    private MovieAdapter mMovieAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +31,12 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
 //        GetRawData getRawData = new GetRawData(this);
 //        getRawData.execute(myURL);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mMoviesAdapter = new MoviesAdapter(this, new ArrayList<Movie>());
-        recyclerView.setAdapter(mMoviesAdapter);
-
+        mMovieAdapter = new MovieAdapter(this, new ArrayList<Movie>());
+        recyclerView.setAdapter(mMovieAdapter);
 
 
     }
@@ -55,20 +53,18 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
     }
 
     public void onDataAvailable(List<Movie> movies, DownloadStatus status) {
+        Log.d(TAG, "onAvailableComplete: starts");
+
         if(status == DownloadStatus.OK) {
-            Log.d(TAG, "onAvailableComplete: data is " + movies);
 
-
-//            displayTextView = findViewById(R.id.displayTextView);
-//            displayTextView.setText(movies);
-
-        mMoviesAdapter.loadNewData(movies);
+            mMovieAdapter.loadNewData(movies);
 
         }
         else {
             // download or processing failed
             Log.e(TAG, "onAvailableComplete failed with status" + status);
         }
+        Log.d(TAG, "onDataAvailable: ends");
     }
 
 
