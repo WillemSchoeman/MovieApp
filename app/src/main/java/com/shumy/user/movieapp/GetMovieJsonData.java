@@ -35,6 +35,7 @@ public class GetMovieJsonData extends AsyncTask<String,Void,List<Movie>> impleme
         Log.d(TAG, "GetMovieJsonData called");
         mCallBack = callback;
         newURL = myURL;
+
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -78,8 +79,9 @@ public class GetMovieJsonData extends AsyncTask<String,Void,List<Movie>> impleme
                     String rating = jsonMovie.getString("vote_average");
                     String summary = jsonMovie.getString("overview");
                     String poster = jsonMovie.getString("poster_path");
+                    String posterURL = poster.replace("/","https://image.tmdb.org/t/p/w500/");
 
-                    Movie movieObject = new Movie(title,releaseYear,rating,summary,poster);
+                    Movie movieObject = new Movie(title,releaseYear,rating,summary,poster,posterURL);
                     mMovieList.add(movieObject);
 
                     Log.d(TAG, "onDownloadComplete " + movieObject.toString());

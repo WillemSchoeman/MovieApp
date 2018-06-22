@@ -7,13 +7,15 @@ public class Movie {
     private String mRating;
     private String mSummary;
     private String mPoster;
+    private String mPosterURL;
 
-    public Movie(String title, String releaseYear, String rating, String summary, String poster) {
+    public Movie(String title, String releaseYear, String rating, String summary, String poster, String posterURL) {
         mTitle = title;
         mReleaseYear = releaseYear;
         mRating = rating;
         mSummary = summary;
         mPoster = poster;
+        mPosterURL = posterURL;
     }
 
     public String getTitle() {
@@ -36,6 +38,8 @@ public class Movie {
         return mPoster;
     }
 
+    public String getPosterURL() { return mPosterURL; }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -44,6 +48,7 @@ public class Movie {
                 ", mRating='" + mRating + '\'' +
                 ", mSummary='" + mSummary + '\'' +
                 ", mPoster='" + mPoster + '\'' +
+                ", mPosterURL'" + mPosterURL + '\'' +
                 '}';
     }
 }

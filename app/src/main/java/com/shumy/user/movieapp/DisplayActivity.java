@@ -57,6 +57,8 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
 
         if(status == DownloadStatus.OK) {
 
+            Log.d(TAG, "onDataAvailable: movie is" + movies);
+
             mMovieAdapter.loadNewData(movies);
 
         }

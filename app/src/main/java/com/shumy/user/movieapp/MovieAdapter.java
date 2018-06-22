@@ -41,12 +41,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         Movie movieItem = mMovieList.get(position);
         Log.d(TAG, "onBindViewHolder: " + movieItem.getTitle() + "-->" + position);
-        Picasso.get().load(movieItem.getPoster())
+        Picasso.get().load(movieItem.getPosterURL())
                 .error(R.drawable.baseline_image_black_48dp)
                 .placeholder(R.drawable.baseline_image_black_48dp)
                 .into(holder.poster);
 
         holder.title.setText(movieItem.getTitle());
+        //holder.year.setText(movieItem.getReleaseYear());
+       // holder.rating.setText(movieItem.getRating());
     }
 
     @Override
@@ -68,10 +70,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         private static final String TAG = "MovieViewHolder";
 
-        ImageView poster = null;
-        TextView title = null;
-        TextView year = null;
-        TextView rating = null;
+        ImageView poster;
+        TextView title;
+        //TextView year;
+        //TextView rating;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
@@ -79,8 +81,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
             this.poster = itemView.findViewById(R.id.posterImageView);
             this.title = itemView.findViewById(R.id.titleTextView);
-            this.year = itemView.findViewById(R.id.yearTextView);
-            this.rating = itemView.findViewById(R.id.ratingTextView);
+            //this.year = itemView.findViewById(R.id.yearTextView);
+            //this.rating = itemView.findViewById(R.id.ratingTextView);
         }
 
     }
