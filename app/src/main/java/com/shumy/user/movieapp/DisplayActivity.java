@@ -1,5 +1,6 @@
 package com.shumy.user.movieapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,8 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
     private static final String TAG = "DisplayActivity";
 
     private MovieAdapter mMovieAdapter;
+
+    static final String MOVIE_TRANSFER = "MOVIE_TRANSFER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
 
         if(status == DownloadStatus.OK) {
 
-            Log.d(TAG, "onDataAvailable: movie is" + movies);
+            //Log.d(TAG, "onDataAvailable: movie is" + movies);
 
             mMovieAdapter.loadNewData(movies);
 
@@ -77,16 +80,27 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
     @Override
     public void onItemClick(View view, int position) {
         Log.d(TAG, "onItemClick: starts");
-        Toast.makeText(DisplayActivity.this,"Normal tap at position" + position,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DisplayActivity.this,"Normal tap at position" + position,Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this,MovieDetail.class);
+        intent.putExtra(MOVIE_TRANSFER,mMovieAdapter.getMovie(position));
+
+
+//        intent.putExtra("Release",mMovieAdapter.getMovie(position).getReleaseYear());
+//        intent.putExtra("Rating",mMovieAdapter.getMovie(position).getRating());
+//        intent.putExtra("Poster",mMovieAdapter.getMovie(position).getPosterURL());
+//        intent.putExtra("Summary",mMovieAdapter.getMovie(position).getSummary());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        startActivity(intent);
+
     }
 
     @Override
     public void onItemLongClick(View view, int position) {
         Log.d(TAG, "onItemLongClick: starts");
-//        Toast.makeText(DisplayActivity.this,"Long tap at position " + position,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DisplayActivity.this,"Long tap at position " + position,Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(this,MovieDetailActivity.class);
-        intent.putExtra(PHOTO_TRANSFER,mMovieAdapter.getMovie(position));
-        startActivity(intent);
+
     }
 }

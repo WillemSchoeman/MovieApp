@@ -40,7 +40,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         //called by the layout manager when it wants new data in an existing row
 
         Movie movieItem = mMovieList.get(position);
-        Log.d(TAG, "onBindViewHolder: " + movieItem.getTitle() + "-->" + position);
+        //Log.d(TAG, "onBindViewHolder: " + movieItem.getTitle() + "-->" + position);
         Picasso.get().load(movieItem.getPosterURL())
                 .error(R.drawable.baseline_image_black_48dp)
                 .placeholder(R.drawable.baseline_image_black_48dp)
