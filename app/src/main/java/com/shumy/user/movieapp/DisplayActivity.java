@@ -8,13 +8,15 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisplayActivity extends MainActivity implements GetMovieJsonData.OnDataAvailable {
+public class DisplayActivity extends MainActivity implements GetMovieJsonData.OnDataAvailable,RecyclerItemClickListener.OnRecyclerClickListener {
 
     private static final String TAG = "DisplayActivity";
 
@@ -35,10 +37,13 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,recyclerView,this));
+
+
         mMovieAdapter = new MovieAdapter(this, new ArrayList<Movie>());
         recyclerView.setAdapter(mMovieAdapter);
 
-
+        Log.d(TAG, "onCreate: ends");
     }
 
     @Override
@@ -69,7 +74,19 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
         Log.d(TAG, "onDataAvailable: ends");
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Log.d(TAG, "onItemClick: starts");
+        Toast.makeText(DisplayActivity.this,"Normal tap at position" + position,Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onItemLongClick(View view, int position) {
+        Log.d(TAG, "onItemLongClick: starts");
+//        Toast.makeText(DisplayActivity.this,"Long tap at position " + position,Toast.LENGTH_SHORT).show();
 
-
+        Intent intent = new Intent(this,MovieDetailActivity.class);
+        intent.putExtra(PHOTO_TRANSFER,mMovieAdapter.getMovie(position));
+        startActivity(intent);
+    }
 }

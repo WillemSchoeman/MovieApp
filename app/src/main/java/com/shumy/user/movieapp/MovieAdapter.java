@@ -53,7 +53,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: called");
+        //Log.d(TAG, "getItemCount: called");
         return ((mMovieList != null) && (mMovieList.size() !=0) ? mMovieList.size() : 0);
     }
 
