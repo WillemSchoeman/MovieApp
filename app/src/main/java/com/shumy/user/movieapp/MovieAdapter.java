@@ -31,7 +31,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Called by the layout manager when it needs a new view
         Log.d(TAG, "onCreateViewHolder: new view requested");
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item,parent,false);
         return new MovieViewHolder(view);
     }
 
@@ -47,8 +47,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 .into(holder.poster);
 
         holder.title.setText(movieItem.getTitle());
-        //holder.year.setText(movieItem.getReleaseYear());
-       // holder.rating.setText(movieItem.getRating());
+        holder.year.setText(movieItem.getReleaseYear());
+        holder.rating.setText(movieItem.getRating());
     }
 
     @Override
@@ -72,8 +72,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         ImageView poster;
         TextView title;
-        //TextView year;
-        //TextView rating;
+        TextView year;
+        TextView rating;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
@@ -81,8 +81,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
             this.poster = itemView.findViewById(R.id.posterImageView);
             this.title = itemView.findViewById(R.id.titleTextView);
-            //this.year = itemView.findViewById(R.id.yearTextView);
-            //this.rating = itemView.findViewById(R.id.ratingTextView);
+            this.year = itemView.findViewById(R.id.releaseTextView);
+            this.rating = itemView.findViewById(R.id.ratingTextView);
         }
 
     }

@@ -37,12 +37,8 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
 //        getRawData.execute(myURL);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this,recyclerView,this));
-
-
         mMovieAdapter = new MovieAdapter(this, new ArrayList<Movie>());
         recyclerView.setAdapter(mMovieAdapter);
 
@@ -85,12 +81,6 @@ public class DisplayActivity extends MainActivity implements GetMovieJsonData.On
         Intent intent = new Intent(this,MovieDetail.class);
         intent.putExtra(MOVIE_TRANSFER,mMovieAdapter.getMovie(position));
 
-
-//        intent.putExtra("Release",mMovieAdapter.getMovie(position).getReleaseYear());
-//        intent.putExtra("Rating",mMovieAdapter.getMovie(position).getRating());
-//        intent.putExtra("Poster",mMovieAdapter.getMovie(position).getPosterURL());
-//        intent.putExtra("Summary",mMovieAdapter.getMovie(position).getSummary());
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         startActivity(intent);
 
