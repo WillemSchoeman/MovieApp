@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">MovieApp</string>
     <string name="title_activity_movie_detail">MovieDetail</string>
+
+    <string name="Welcome">Welcome to my MovieApp</string>
+    <string name="message">Catch up on all things Cinema.</string>
+    <string name="pick">Pick a section and Explore the MovieApp</string>
+
+    <string name="popularButton">Popular</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="rated">Top Rated</string>
+    <string name="playing">Now Showing</string>
+
 </resources>

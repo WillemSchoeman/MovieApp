@@ -24,7 +24,7 @@ public class MovieDetail extends DisplayActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.movie_details);
 
         bigPoster = findViewById(R.id.bigPosterImageView);
         movieTitle = findViewById(R.id.detailTitleTextView);
