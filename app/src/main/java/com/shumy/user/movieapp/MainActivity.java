@@ -32,10 +32,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button playingButton = findViewById(R.id.playingButton);
         Button ratedButton = findViewById(R.id.ratedButton);
         Button upcomingButton = findViewById(R.id.upcomingButton);
+        Button aboutButton = findViewById(R.id.aboutButton);
         popularButton.setOnClickListener(this);
         playingButton.setOnClickListener(this);
         ratedButton.setOnClickListener(this);
         upcomingButton.setOnClickListener(this);
+        aboutButton.setOnClickListener(this);
 
         Log.d(TAG, "onCreate: ends");
     }
@@ -69,7 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "onClick: upcoming button pressed with URL is " + myURL);
                 intent.putExtra(EXTRA_MESSAGE,myURL);
                 break;
-
+            case R.id.aboutButton:
+                intent = new Intent(this,AboutActivity.class);
+                break;
 
             default:
 
